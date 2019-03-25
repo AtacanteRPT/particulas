@@ -56,10 +56,10 @@ export default class Particles {
 			originalColors = Float32Array.from(imgData.data);
 
 			for (let i = 0; i < this.numPoints; i++) {
-				if (originalColors[i * 4 + 0] > threshold) numVisible++;
+				if (originalColors[i * 4 + 0]  < threshold) numVisible++;
 			}
 
-			// console.log('numVisible', numVisible, this.numPoints);
+			console.log('numVisible', numVisible, this.numPoints);
 		}
 
 		const uniforms = {
@@ -107,7 +107,7 @@ export default class Particles {
 		const angles = new Float32Array(numVisible);
 
 		for (let i = 0, j = 0; i < this.numPoints; i++) {
-			if (discard && originalColors[i * 4 + 0] <= threshold) continue;
+			if (discard && originalColors[i * 4 + 0] >= threshold) continue;
 
 			offsets[j * 3 + 0] = i % this.width;
 			offsets[j * 3 + 1] = Math.floor(i / this.width);
@@ -135,7 +135,7 @@ export default class Particles {
 
 	initHitArea() {
 		const geometry = new THREE.PlaneGeometry(this.width, this.height, 1, 1);
-		const material = new THREE.MeshBasicMaterial({ color: 0xFFFFFF, wireframe: true, depthTest: false });
+		const material = new THREE.MeshBasicMaterial({ color: 0xFF0000, wireframe: true, depthTest: false });
 		material.visible = false;
 		this.hitArea = new THREE.Mesh(geometry, material);
 		this.container.add(this.hitArea);

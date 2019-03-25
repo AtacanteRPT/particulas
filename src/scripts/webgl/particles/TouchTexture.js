@@ -79,8 +79,8 @@ export default class TouchTexture {
 
 		const radius = this.size * this.radius * intensity;
 		const grd = this.ctx.createRadialGradient(pos.x, pos.y, radius * 0.25, pos.x, pos.y, radius);
-		grd.addColorStop(0, `rgba(255, 255, 255, 0.2)`);
-		grd.addColorStop(1, 'rgba(0, 0, 0, 0.0)');
+		grd.addColorStop(1, `rgba(255, 255, 255, 0.2)`);
+		grd.addColorStop(0, 'rgba(0, 0, 0, 0.0)');
 
 		this.ctx.beginPath();
 		this.ctx.fillStyle = grd;
